@@ -4,6 +4,8 @@ class WebController < ApplicationController
   end
 
   def flush
+    send_msgs = Msg.where(:send_id => params[:target_user_id])
+    send_msgs << Msg.where(:recv_id => params[:target_user_id])
 
   end
 
