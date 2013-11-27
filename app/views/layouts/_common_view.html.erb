@@ -1,0 +1,36 @@
+				<%if mode == 'mobile'%>	
+					<div id="message_div" class="widget-content">
+				<%elsif mode == 'web'%>	
+					<div id="message_div" class="widget-content padded">
+				<%end%>
+						<ul id="message_area">
+							<li class="<%=mode%>">
+								<img class="<%=mode%>" src="player/ldh.png">
+								<div class="bubble">
+									<a class="user-name" href="">John Smith</a>
+									<p class="message">
+										Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.
+									</p>
+									<p class="time">
+										<strong>Today </strong>3:53 pm
+									</p>
+								</div>
+							</li>
+
+							<li class="current-user <%=mode%>">
+								<img class="<%=mode%>"src="player/ldh.png">
+								<div class="bubble">
+									<a class="user-name" href="">Jane Smith</a>
+									<p class="message">
+										Sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed augue. Integer eu magna sit amet metus fermentum posuere. Morbi sit amet nulla sed dolor elementum imperdiet. Quisque fermentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+									</p>
+									<p class="time">
+										<strong>Today </strong>3:53 pm
+									</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="post-message">
+						<input id="message_text" class="form-control" placeholder="Write your message here" type="text"><input id="message_send" type="submit" value="Send">
+					</div>
