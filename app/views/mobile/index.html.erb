@@ -4,37 +4,7 @@
 			<!-- Conversation -->
 			<div class="col-lg-12">
 				<div class="widget-container scrollable chat">
-					<div class="widget-content">
-						<ul>
-							<li class="mobile">
-								<img class="mobile" src="/player/ldh.png">
-								<div class="bubble">
-									<a class="user-name" href="">John Smith</a>
-									<p class="message">
-										Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-									</p>
-									<p class="time">
-										<strong>Today </strong>3:53 pm
-									</p>
-								</div>
-							</li>
-							<li class="current-user mobile">
-								<img class="mobile" src="/player/ldh.png">
-								<div class="bubble">
-									<a class="user-name" href="">Jane Smith</a>
-									<p class="message">
-										Donec odio. Quisque volutpat mattis eros.
-									</p>
-									<p class="time">
-										<strong>Today </strong>3:53 pm
-									</p>
-								</div>
-							</li>
-													</ul>
-					</div>
-					<div class="post-message">
-						<input class="form-control" placeholder="Write your message here&#65533;&#65533;" type="text"><input type="submit" value="Send">
-					</div>
+					<%=render :partial => 'layouts/common_view', :locals => {:mode => 'mobile'}%>
 				</div>
 			</div>
 		</div>
@@ -42,3 +12,6 @@
 </div>
 
 
+<script>
+	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'mobile'}%>
+</script>
