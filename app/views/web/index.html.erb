@@ -48,7 +48,7 @@
 						<i class="icon-comments"></i>Chat with <a href="/chat.html#">John Smith</a><i class="icon-cog pull-right"></i><i class="icon-smile pull-right"></i>
 					</div>
 					<div class="widget-content padded">
-						<ul>
+						<ul id="message_area">
 							<li class="web">
 								<img class="web" src="player/ldh.png">
 								<div class="bubble">
@@ -77,7 +77,7 @@
 						</ul>
 					</div>
 					<div class="post-message">
-						<input class="form-control" placeholder="Write your message here" type="text"><input type="submit" value="Send">
+						<input id="message_text" class="form-control" placeholder="Write your message here" type="text"><input id="message_send" type="button" value="Send">
 					</div>
 				</div>
 			</div>
@@ -85,3 +85,30 @@
 	</div>
 </div>
 
+<script>
+	$(function(){
+		$("#current_user_send").bind("click",function(){
+			message_text = $("#message_text").val();
+			message_form = make_message_form("ldh.png", "이두희", message_text,"12:30" ,"current-user");
+			$("#message_area").append(message_form);
+			$("#message_text").val("")
+		})
+	});
+  
+	function make_message_form(photo_filename, name, message, time, class_name){
+		message_form =
+			'<li class="' + class_name+ ' web">'
+			+'	<img class="web" src="player/' + photo_filename + '">'
+			+'	<div class="bubble">'
+			+'		<a class="user-name" href="">' + name + '</a>'
+			+'		<p class="message">'
+			+ 			message
+			+'		</p>'
+			+'		<p class="time">'
+			+'			<strong>' + time
+			+'		</p>'
+			+'	</div>'
+			+'</li>';
+		return message_form;
+	}
+</script>
