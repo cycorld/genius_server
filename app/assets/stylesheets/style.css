@@ -619,18 +619,33 @@ dl {
     .chat .widget-content ul {
       list-style: none;
       padding: 0; }
-      .chat .widget-content ul li {
+      .chat .widget-content ul li.web {
+        margin-bottom: 14px;
+        padding-left: 90px;
+        padding-right: 80px;
+        position: relative; }
+      .chat .widget-content ul li.mobile {
         margin-bottom: 14px;
         padding-left: 40px;
         padding-right: 80px;
         position: relative; }
         .chat .widget-content ul li:last-child {
           margin-bottom: 0; }
-        .chat .widget-content ul li img {
+        .chat .widget-content ul li img.web {
           position: absolute;
           bottom: -2px;
           left: 0;
-          border-radius: 50%; }
+          border-radius: 20%;
+					width: 80px;
+					height: 80px; }
+        .chat .widget-content ul li img.mobile {
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          border-radius: 20%;
+					width: 30px;
+					height: 30px; }
+
         .chat .widget-content ul li .bubble {
           padding: 12px 15px;
           background: #e5e5ea;
@@ -661,7 +676,10 @@ dl {
             font-size: 0.8em;
             color: #888888;
             margin-bottom: 0; }
-        .chat .widget-content ul li.current-user {
+        .chat .widget-content ul li.current-user.web {
+          padding-right: 90px;
+          padding-left: 80px; }
+        .chat .widget-content ul li.current-user.mobile {
           padding-right: 40px;
           padding-left: 80px; }
           .chat .widget-content ul li.current-user img {
