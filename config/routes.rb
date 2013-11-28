@@ -3,4 +3,5 @@ GServer::Application.routes.draw do
   match 'mobile' => "mobile#index", via: [:get, :post]
   match 'push_message' => "web#push", via: [:get, :post]
   match 'receive_message' => "web#receive_message", via: [:get, :post]
+  match 'get_users' => "web#get_users", via: [:get, :post]
 end

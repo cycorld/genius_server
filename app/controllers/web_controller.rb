@@ -37,10 +37,9 @@ class WebController < ApplicationController
 
 	def receive_message
 		msgs = Msg.where("send_id = ? OR recv_id = ?", params[:user_id], params[:user_id])
-		puts msgs
-		send_msg = Array.new
+		user_msgs = Array.new
 		msgs.each do |msg|
-			send_msg.push({
+			user_msgs.push({
 				content: msg.content,
 				send_id: msg.send_id,
 				recv_id: msg.recv_id,
@@ -48,8 +47,13 @@ class WebController < ApplicationController
 			});
 		end
 
-    render :json => send_msg
+    render :json => user_msgs
 	end
+
+	def get_users
+    render :json => User.all.to_json
+	end
+
 
   def login
   end

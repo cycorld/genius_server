@@ -1,10 +1,5 @@
 <div class="modal-shiftfix">
 	<div class="container-fluid main-content">
-		<div class="page-title">
-			<h1>
-				Chat
-			</h1>
-		</div>
 		<div class="row">
 			<!-- Conversation -->
 			<div class="col-lg-12">
@@ -22,7 +17,7 @@
 						</ul>
 					</div>
 					<div class="heading">
-						<i class="icon-comments"></i>Chat with <a href="/chat.html#">John Smith</a><i class="icon-cog pull-right"></i><i class="icon-smile pull-right"></i>
+						<a href="#" onclick="msg_flush()" >flush</a>
 					</div>
 					<%=render :partial => 'layouts/common_view', :locals => {:mode => 'web'}%>
 				</div>

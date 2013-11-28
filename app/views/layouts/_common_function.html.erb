@@ -2,44 +2,39 @@
 //my_user_id is in web/mobile index.html.erb
 //target_user_id is in web/mobile index.html.erb
 	$(function(){
+//receive all people
+		var user
 		$.ajax({
-			url: "/receive_message",
+			url: "/get_users",
 			type: "POST",
-			data: {
-				user_id: my_user_id
-			},
 			success: function(data) {
-				console.log(data)
+				user = new Array(data.length+1)
 				for(i=0;i<data.length;i++){
-					console.log(data[i].send_id +" " + parseInt(my_user_id))
-					if(data[i].send_id == parseInt(my_user_id)){
-						make_message_form("ldh.png", data[i].send_id, data[i].content, data[i].time ,"current-user");
-					}else if(data[i].send_id == parseInt(target_user_id)){
-						make_message_form("ldh.png", data[i].send_id, data[i].content, data[i].time ,"");
-					}
+					console.log(data[i])
+					user[i+1]=data[i]
 				}
-
-				sh = $("#message_area").height()
-				$("#message_div").scrollTop(sh)
+				receive_previous_msg(my_user_id, user)
 			}
 		})
 
+//push event
     var pusher = new Pusher('ff5d6babad3bf1eb28c6');
     var channel = pusher.subscribe(my_user_id); 
     channel.bind('new_msg', function(data) {
       console.log(my_user_id);
       console.log(data);
 			if(data.send_id != my_user_id){
-				make_message_form("ldh.png", data.send_id, data.content, data.time ,"");
+				make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time ,"");
 			}
 			sh=$("#message_area").height()
 			$("#message_div").scrollTop(sh)
     });
 
+//send button click
 		$("#message_send").bind("click",function(){
 			time = "12:30"
 			message_text = $("#message_text").val();
-			make_message_form("ldh.png", my_user_id, message_text, time ,"current-user");
+			make_message_form(user[my_user_id].filename, user[my_user_id].name, data.content, data.time ,"current-user");
 			$("#message_text").val("");
 
 			sh=$("#message_area").height()
@@ -66,10 +61,11 @@
 			}
 		});
 	});
+
 	function make_message_form(photo_filename, name, message, time, class_name){
 		message_form =
 			'<li class="' + class_name + ' <%=mode%>">'
-			+'	<img class="<%= mode%>" src="player/' + photo_filename + '">'
+			+'	<img class="<%= mode%>" src="player/' + photo_filename + '.png">'
 			+'	<div class="bubble">'
 			+		 '<p>' + name + '</p>'
 			+'		<p class="message">'
@@ -83,3 +79,29 @@
 
 			$("#message_area").append(message_form);
 	}
+
+	function receive_previous_msg(my_user_id, user){
+	//receive previous message
+		$.ajax({
+			url: "/receive_message",
+			type: "POST",
+			data: {
+				user_id: my_user_id
+			},
+			success: function(data) {
+				console.log(data)
+				console.log(user)
+				for(i=0;i<data.length;i++){
+					console.log(data[i].send_id +" " + parseInt(my_user_id))
+					if(data[i].send_id == parseInt(my_user_id)){
+						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,"current-user");
+					}else if(data[i].send_id == parseInt(target_user_id)){
+						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,"current-user");
+					}
+				}
+				sh = $("#message_area").height()
+				$("#message_div").scrollTop(sh)
+			}
+		})
+	}
+
