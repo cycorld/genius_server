@@ -16,16 +16,17 @@ class WebController < ApplicationController
   end
 
   def push #Ajax call
+		puts "params#{params.inspect}"
     msg = Msg.new
-    msg.send_id = 1 #HARD CODED admin ID
+    msg.send_id = params[:send_user_id] #HARD CODED admin ID
     msg.recv_id = params[:target_user_id]
     msg.content = params[:content]
     msg.save
     #sender #receiver
-    ['1', "#{params[:target_user_id]}"].each do |x|
+    [params[:send_user_id], "#{params[:target_user_id]}"].each do |x|
       Pusher[x].trigger('new_msg', {
         content: params[:content],
-        send_id: 1,
+        send_id: params[:send_user_id],
         recv_id: params[:target_user_id],
 				time: msg.created_at
       })

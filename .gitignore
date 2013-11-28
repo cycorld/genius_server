@@ -10,6 +10,7 @@
 
 # Ignore lock file
 /Gemfile.lock
+/Gemfile
 
 # Ignore bundler config.
 /.bundle

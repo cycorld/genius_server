@@ -2,6 +2,7 @@
 //my_user_id is in web/mobile index.html.erb
 //target_user_id is in web/mobile index.html.erb
 	$(function(){
+
     var pusher = new Pusher('ff5d6babad3bf1eb28c6');
     var channel = pusher.subscribe(my_user_id); 
     channel.bind('new_msg', function(data) {
@@ -14,30 +15,28 @@
     });
 
 		$("#message_send").bind("click",function(){
-
 			time = "12:30"
 			message_text = $("#message_text").val();
-			message_form = make_message_form("ldh.png", "이두희", message_text, time ,"current-user");
+			message_form = make_message_form("ldh.png", my_user_id, message_text, time ,"current-user");
 
 			$("#message_area").append(message_form);
 			$("#message_text").val("");
 			sh=$("#message_area").height()
 			$("#message_div").scrollTop(sh)
 			$("#message_text").focus();
-
-			<% if mode == 'web'%>
-				$.ajax({
-					url: "/push_web",
-					type: "POST",
-					data: {
-						target_user_id: target_user_id,
-						content: message_text
-					},
-					success: function(data) {
-						//alert(data)
-					}
-				});
-			<%end%>
+//message to push action
+			$.ajax({
+				url: "/push_message",
+				type: "POST",
+				data: {
+					target_user_id: target_user_id,
+					send_user_id: my_user_id,
+					content: message_text
+				},
+				success: function(data) {
+					//alert(data)
+				}
+			})
 		})
 
 		$('#message_text').bind('keypress', function(e) {
