@@ -627,7 +627,7 @@ dl {
       .chat .widget-content ul li.mobile {
         margin-bottom: 14px;
         padding-left: 40px;
-        padding-right: 80px;
+        padding-right: 40px;
         position: relative; }
         .chat .widget-content ul li:last-child {
           margin-bottom: 0; }
@@ -681,7 +681,7 @@ dl {
           padding-left: 80px; }
         .chat .widget-content ul li.current-user.mobile {
           padding-right: 40px;
-          padding-left: 80px; }
+          padding-left: 40px; }
           .chat .widget-content ul li.current-user img {
             right: 0;
             left: auto; }
@@ -924,7 +924,7 @@ body.fourofour {
     overflow: hidden; }
 
   body {
-    padding-top: 60px; }
+    padding-top: 0px; }
     body.nav-open {
       overflow: hidden; }
       body.nav-open .navbar, body.nav-open .container-fluid.main-content {
