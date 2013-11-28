@@ -27,7 +27,14 @@
 				make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
 				sh=$("#message_area").height()
 				$("#message_div").scrollTop(sh)
-			} else if(data.send_id == my_user_id){
+			}
+			<%if mode == 'web'%>
+				if(data.send_id != target_user_id){
+					$("#list_circle_" + data.send_id).addClass("text-danger")
+				}
+			<%end%>
+			
+			if(data.send_id == my_user_id){
 				$("#time_" + data.time_id).html(data.time)
 			}
     });
@@ -113,6 +120,12 @@
 			for(i=1;i<user.length;i++)
 				$("#user_list_" + i).removeClass("btn-primary")
 			$("#user_list_" + user_id).addClass("btn-primary")
+
+			for(i=1;i<user.length;i++){
+				console.log($("#list_circle_"+i).className)
+			}
+
+			$("#list_circle_" + user_id).removeClass("text-danger")
 
 			target_user_id = user_id
 

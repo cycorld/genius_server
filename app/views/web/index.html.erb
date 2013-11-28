@@ -13,8 +13,8 @@
 								<%if user.id == 1%>
 									<%next%>
 								<%end%>
-								<li>
-								<a id="user_list_<%=user.id%>" onclick="load_user_chat('<%=user.id%>')"><img width="30" height="30" src="/player/<%=user.filename%>.png"><%=user.name%><i class="icon-circle text-danger"></i></a>
+								<li style="cursor:pointer">
+								<a id="user_list_<%=user.id%>" onclick="load_user_chat('<%=user.id%>')"><img width="30" height="30" src="/player/<%=user.filename%>.png"><%=user.name%><i id="list_circle_<%=user.id%>" class="icon-circle"></i></a>
 								</li>
 							<%end%>
 						</ul>
@@ -32,7 +32,6 @@
 <script>
 	var my_user_id = '1' 
 	var target_user_id = '1'
-
 
 	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'web'}%>
 	$(function(){
