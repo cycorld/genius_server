@@ -27,17 +27,15 @@
 				make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
 				sh=$("#message_area").height()
 				$("#message_div").scrollTop(sh)
+			}else if(data.send_id == my_user_id){
+				$("#time_" + data.time_id).html(data.time)
 			}
 			<%if mode == 'web'%>
 				if(data.send_id != target_user_id){
 					$("#list_circle_" + data.send_id).addClass("text-danger")
 				}
 			<%end%>
-			
-			if(data.send_id == my_user_id){
-				$("#time_" + data.time_id).html(data.time)
-			}
-    });
+		});
 
 //send button click
 		$("#message_send").bind("click",function(){
@@ -115,24 +113,17 @@
 	function load_user_chat(user_id){
 		//TODO change btn-primary class
 		$("#message_area").html("");
-	
 		<%if mode == 'web'%>
-			for(i=1;i<user.length;i++)
-				$("#user_list_" + i).removeClass("btn-primary")
-			$("#user_list_" + user_id).addClass("btn-primary")
-
 			for(i=1;i<user.length;i++){
-				console.log($("#list_circle_"+i).className)
+				$("#user_list_" + i).removeClass("btn-primary")
 			}
-
+			$("#user_list_" + user_id).addClass("btn-primary")
 			$("#list_circle_" + user_id).removeClass("text-danger")
 
 			target_user_id = user_id
-
 			if(target_user_id != '1'){
 				$("#post_message").show();
 			}
-
 			receive_previous_msg()
 		<%elsif mode == 'mobile'%>
 			receive_previous_msg()

@@ -38,5 +38,21 @@
 		if(target_user_id == '1')
 			$("#post_message").hide();
 	})
+	function msg_flush(){
+		c = confirm("Are you sure?")
+		if(c){
+			$.ajax({
+				url: "/flush",
+				type: "POST",
+				data: {
+					target_user_id: target_user_id
+				},
+				success: function(data) {
+					alert("flushed");
+					window.location.reload();
+				}
+			})
+		}
+	}
 
 </script>

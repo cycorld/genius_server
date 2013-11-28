@@ -6,8 +6,7 @@ class WebController < ApplicationController
   end
 
   def flush #Ajax call
-    send_msgs = Msg.where(:send_id => params[:target_user_id])
-    send_msgs << Msg.where(:recv_id => params[:target_user_id])
+    send_msgs = Msg.where("send_id = ? OR recv_id = ?",params[:target_user_id],params[:target_user_id] )
     send_msgs.each do |x|
       x.deleted = true
       x.save
@@ -37,7 +36,7 @@ class WebController < ApplicationController
   end
 
 	def receive_message
-		msgs = Msg.where("(send_id = ? AND recv_id = ?) OR (send_id = ? AND recv_id = ?)", params[:my_user_id], params[:target_user_id], params[:target_user_id], params[:my_user_id])
+		msgs = Msg.where("((send_id = ? AND recv_id = ?) OR (send_id = ? AND recv_id = ?)) AND deleted = ?", params[:my_user_id], params[:target_user_id], params[:target_user_id], params[:my_user_id], false)
 		puts msgs.inspect
 		user_msgs = Array.new
 		msgs.each do |msg|
