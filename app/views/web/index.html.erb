@@ -6,7 +6,7 @@
 				<div class="widget-container scrollable chat chat-page">
 					<div class="contact-list">
 						<div class="heading">
-							Contacts (<%=@users.size-1%>)<i class="icon-plus pull-right"></i>
+							<a href="/">Players (<%=@users.size-1%>)</a>
 						</div>
 						<ul>
 							<%@users.each do |user|%>
@@ -17,10 +17,8 @@
 								<a id="user_list_<%=user.id%>" onclick="load_user_chat('<%=user.id%>')"><img width="30" height="30" src="/player/<%=user.filename%>.png"><%=user.name%><i id="list_circle_<%=user.id%>" class="icon-circle"></i></a>
 								</li>
 							<%end%>
+						<a href="#" onclick="msg_flush()">&nbsp;<br />&nbsp;<br />모든 대화기록 리셋하기(클릭주의)</a>
 						</ul>
-					</div>
-					<div class="heading">
-						<a href="#" onclick="msg_flush()" >flush</a>
 					</div>
 					<%=render :partial => 'layouts/common_view', :locals => {:mode => 'web'}%>
 				</div>
@@ -34,12 +32,12 @@
 	var target_user_id = '1'
 
 	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'web'}%>
+
 	$(function(){
-		if(target_user_id == '1')
-			$("#post_message").hide();
-	})
+    //Nothing..
+  });
 	function msg_flush(){
-		c = confirm("Are you sure?")
+		c = confirm("진짜임?")
 		if(c){
 			$.ajax({
 				url: "/flush",
@@ -48,11 +46,9 @@
 					target_user_id: target_user_id
 				},
 				success: function(data) {
-					alert("flushed");
 					window.location.reload();
 				}
 			})
 		}
 	}
-
 </script>

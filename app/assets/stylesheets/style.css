@@ -601,7 +601,7 @@ dl {
     .widget-container.scrollable .shadow {
       box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1); }
     .widget-container.scrollable .widget-content {
-      height: 100%;
+      height: 110%;
       position: relative;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch; }
@@ -616,7 +616,7 @@ dl {
   padding-bottom: 52px; }
   .chat .widget-content {
     padding-right: 20px;
-    background-color: white; }
+    background-color: rgb(253, 248, 234); }
     .chat .widget-content .scrollbar-path-vertical {
       bottom: 56px !important; }
     .chat .widget-content ul {
@@ -740,7 +740,7 @@ dl {
       font-size: 14px; }
 
 .widget-container.chat-page {
-  height: 700px;
+  height: 650px;
   padding: 0 0 102px 222px;
   position: relative;
   background-color: #f2f2f2; }
@@ -786,8 +786,8 @@ dl {
           padding: 8px 0 8px 15px;
           color: #888888; }
           .widget-container.chat-page .contact-list ul li a:hover {
-            background-color: #e6e6e6;
-            color: #666666; }
+            background-color: #792D2D;
+            color: #AF4A4A; }
         .widget-container.chat-page .contact-list ul li img {
           border-radius: 50%;
           margin-right: 10px; }

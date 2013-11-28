@@ -21,8 +21,6 @@
     var pusher = new Pusher('ff5d6babad3bf1eb28c6');
     var channel = pusher.subscribe(my_user_id); 
     channel.bind('new_msg', function(data) {
-      console.log(my_user_id);
-      console.log(data);
 			if(data.send_id == target_user_id){
 				make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
 				sh=$("#message_area").height()
@@ -90,25 +88,25 @@
 
 	function receive_previous_msg(){
 	//receive previous message
-		$.ajax({
-			url: "/receive_message",
-			type: "POST",
-			data: {
-				my_user_id: my_user_id,
-				target_user_id: target_user_id
-			},
-			success: function(data) {
-				for(i=0;i<data.length;i++){
-					if(data[i].send_id == parseInt(my_user_id)){
-						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time, 0 ,"current-user");
-					}else if(data[i].send_id == parseInt(target_user_id)){
-						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,0 ,"");
-					}
-				}
-				sh = $("#message_area").height()
-				$("#message_div").scrollTop(sh)
-			}
-		})
+    $.ajax({
+      url: "/receive_message",
+      type: "POST",
+      data: {
+        my_user_id: my_user_id,
+        target_user_id: target_user_id
+      },
+      success: function(data) {
+        for(i=0;i<data.length;i++){
+          if(data[i].send_id == parseInt(my_user_id)){
+            make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time, 0 ,"current-user");
+          }else if(data[i].send_id == parseInt(target_user_id)){
+            make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,0 ,"");
+          }
+        }
+        sh = $("#message_area").height()
+        $("#message_div").scrollTop(sh)
+      }
+    })
 	}
 	function load_user_chat(user_id){
 		//TODO change btn-primary class
@@ -125,6 +123,14 @@
 				$("#post_message").show();
 			}
 			receive_previous_msg()
+      if(parseInt(target_user_id) == 1){
+        $("#message_area").html("<center><img src='/player/bdm.png'/></center>");
+        $('#message_text').attr('disabled', 'disabled');  
+        $('#message_text').attr('placeholder', '대화상대를 선택하세요');
+      }else{
+        $('#message_text').removeAttr('disabled');
+        $('#message_text').attr('placeholder', '메시지를 쓰세요');
+      }
 		<%elsif mode == 'mobile'%>
 			receive_previous_msg()
 		<%end%>
