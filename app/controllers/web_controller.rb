@@ -36,7 +36,8 @@ class WebController < ApplicationController
   end
 
 	def receive_message
-		msgs = Msg.where("send_id = ? OR recv_id = ?", params[:user_id], params[:user_id])
+		msgs = Msg.where("(send_id = ? AND recv_id = ?) OR (send_id = ? AND recv_id = ?)", params[:my_user_id], params[:target_user_id], params[:target_user_id], params[:my_user_id])
+		puts msgs.inspect
 		user_msgs = Array.new
 		msgs.each do |msg|
 			user_msgs.push({

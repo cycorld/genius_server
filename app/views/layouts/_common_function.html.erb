@@ -3,7 +3,6 @@
 //target_user_id is in web/mobile index.html.erb
 	$(function(){
 //receive all people
-		var user
 		$.ajax({
 			url: "/get_users",
 			type: "POST",
@@ -13,7 +12,7 @@
 					console.log(data[i])
 					user[i+1]=data[i]
 				}
-				receive_previous_msg(my_user_id, user)
+				load_user_chat('2')
 			}
 		})
 
@@ -23,18 +22,19 @@
     channel.bind('new_msg', function(data) {
       console.log(my_user_id);
       console.log(data);
-			if(data.send_id != my_user_id){
+			if(data.send_id == target_user_id){
 				make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time ,"");
+				sh=$("#message_area").height()
+				$("#message_div").scrollTop(sh)
 			}
-			sh=$("#message_area").height()
-			$("#message_div").scrollTop(sh)
+
     });
 
 //send button click
 		$("#message_send").bind("click",function(){
-			time = "12:30"
+			time = "12:30" //TODO change Time
 			message_text = $("#message_text").val();
-			make_message_form(user[my_user_id].filename, user[my_user_id].name, data.content, data.time ,"current-user");
+			make_message_form(user[my_user_id].filename, user[my_user_id].name, message_text, time ,"current-user");
 			$("#message_text").val("");
 
 			sh=$("#message_area").height()
@@ -77,7 +77,7 @@
 			+'	</div>'
 			+'</li>';
 
-			$("#message_area").append(message_form);
+		$("#message_area").append(message_form);
 	}
 
 	function receive_previous_msg(my_user_id, user){
@@ -86,17 +86,15 @@
 			url: "/receive_message",
 			type: "POST",
 			data: {
-				user_id: my_user_id
+				my_user_id: my_user_id,
+				target_user_id: target_user_id
 			},
 			success: function(data) {
-				console.log(data)
-				console.log(user)
 				for(i=0;i<data.length;i++){
-					console.log(data[i].send_id +" " + parseInt(my_user_id))
 					if(data[i].send_id == parseInt(my_user_id)){
 						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,"current-user");
 					}else if(data[i].send_id == parseInt(target_user_id)){
-						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,"current-user");
+						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,"");
 					}
 				}
 				sh = $("#message_area").height()
