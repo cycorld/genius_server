@@ -14,34 +14,11 @@
 							Contacts (15)<i class="icon-plus pull-right"></i>
 						</div>
 						<ul>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="/player/dh.png">이두희<i class="icon-circle text-danger"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female2.png">Jessie Pinkman<i class="icon-circle text-success"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-male.jpg">Skyler White<i class="icon-circle text-warning"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female.png">Flynn White<i class="icon-circle text-danger"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female2.png">Hank Schrader<i class="icon-circle text-muted"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-male.jpg">Marie Schrader<i class="icon-circle text-success"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female.png">Steve Gomez<i class="icon-circle text-warning"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female2.png">Saul Goodman<i class="icon-circle text-success"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-male.jpg">Mike Ehrmantraut<i class="icon-circle text-success"></i></a>
-							</li>
-
+							<%@users.each do |user|%>
+								<li>
+								<a href="/chat.html#"><img width="30" height="30" src="/player/<%=user.filename%>.png"><%=user.name%><i class="icon-circle text-danger"></i></a>
+								</li>
+							<%end%>
 						</ul>
 					</div>
 					<div class="heading">

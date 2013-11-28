@@ -721,6 +721,16 @@ dl {
       color: #007aff;
       font-weight: 600;
       font-size: 14px; }
+    .chat .post-message .send-div {
+      position: absolute;
+      top: 12px;
+      right: 10px;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      color: #007aff;
+      font-weight: 600;
+      font-size: 14px; }
 
 .widget-container.chat-page {
   height: 700px;

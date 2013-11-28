@@ -1,6 +1,6 @@
 class WebController < ApplicationController
   def index
-
+		@users = User.all
   end
 
   def flush
