@@ -626,7 +626,7 @@ dl {
         position: relative; }
       .chat .widget-content ul li.mobile {
         margin-bottom: 14px;
-        padding-left: 40px;
+        padding-left: 55px;
         padding-right: 40px;
         position: relative; }
         .chat .widget-content ul li:last-child {
@@ -668,9 +668,13 @@ dl {
             font-size: 1.1em;
             margin-bottom: 8px;
             display: inline-block; }
-          .chat .widget-content ul li .bubble p.message {
+          .chat .widget-content ul li .bubble p.message.web {
             font-size: 0.95em;
             margin-bottom: 12px;
+            color: #333333; }
+          .chat .widget-content ul li .bubble p.message.mobile {
+            font-size: 0.95em;
+            margin-bottom: 6px;
             color: #333333; }
           .chat .widget-content ul li .bubble .time {
             font-size: 0.8em;
@@ -680,7 +684,7 @@ dl {
           padding-right: 90px;
           padding-left: 80px; }
         .chat .widget-content ul li.current-user.mobile {
-          padding-right: 40px;
+          padding-right: 55px;
           padding-left: 40px; }
           .chat .widget-content ul li.current-user img {
             right: 0;
