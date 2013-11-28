@@ -21,13 +21,14 @@
     var pusher = new Pusher('ff5d6babad3bf1eb28c6');
     var channel = pusher.subscribe(my_user_id); 
     channel.bind('new_msg', function(data) {
-			if(data.send_id == target_user_id){
-				make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
-				sh=$("#message_area").height()
-				$("#message_div").scrollTop(sh)
-			}else if(data.send_id == my_user_id){
-				$("#time_" + data.time_id).html(data.time)
-			}
+      $("#send_time_" + data.time_id).remove();
+			if(data.send_id == my_user_id){
+        make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"current-user");
+      }else if(data.send_id == target_user_id){
+        make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
+      }
+      sh=$("#message_area").height();
+      $("#message_div").scrollTop(sh);
 			<%if mode == 'web'%>
 				if(data.send_id != target_user_id){
 					$("#list_circle_" + data.send_id).addClass("text-danger")
@@ -37,13 +38,17 @@
 
 //send button click
 		$("#message_send").bind("click",function(){
-			time_id= time_id +1
+			time_id = time_id + 1
 			message_text = $("#message_text").val();
-			make_message_form(user[my_user_id].filename, user[my_user_id].name, message_text, "", time_id ,"current-user");
+			msg_temp =      '<li class="current-user <%=mode%>" id="send_time_' + time_id +'">'
+                      +'	<div class="bubble ">'
+                      +'		<p>sending...</p>'
+                      +'	</div>'
+                      +'</li>';
+      $("#message_area").append(msg_temp);
+      sh=$("#message_area").height()
+      $("#message_div").scrollTop(sh)
 			$("#message_text").val("");
-
-			sh=$("#message_area").height()
-			$("#message_div").scrollTop(sh)
 			$("#message_text").focus();
 //message to push action
 			$.ajax({
@@ -136,6 +141,3 @@
 		<%end%>
 
 	}
-
-
-

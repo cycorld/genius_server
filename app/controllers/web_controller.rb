@@ -6,7 +6,8 @@ class WebController < ApplicationController
   end
 
   def flush #Ajax call
-    send_msgs = Msg.where("send_id = ? OR recv_id = ?",params[:target_user_id],params[:target_user_id] )
+   #send_msgs = Msg.where("send_id = ? OR recv_id = ?",params[:target_user_id],params[:target_user_id] )
+    send_msgs = Msg.where(:deleted => false)
     send_msgs.each do |x|
       x.deleted = true
       x.save
@@ -15,16 +16,25 @@ class WebController < ApplicationController
   end
 
   def push #Ajax call
-		puts "params#{params.inspect}"
+
+    content = params[:content]
+
     msg = Msg.new
-    msg.send_id = params[:send_user_id] #HARD CODED admin ID
+    msg.send_id = params[:send_user_id] 
     msg.recv_id = params[:target_user_id]
-    msg.content = params[:content]
+
+    if params[:content][0] == '/'
+      puts "hi"
+      command = params[:content].split('/')[1]
+      content = %Q[<img src='/images/#{command}.png' />]
+      msg.command = true
+    end
+    msg.content = content
     msg.save
     #sender #receiver
     [params[:send_user_id], "#{params[:target_user_id]}"].each do |x|
       Pusher[x].trigger('new_msg', {
-        content: params[:content],
+        content: content,
         send_id: params[:send_user_id],
         recv_id: params[:target_user_id],
 				time: msg.created_at.strftime("%p %l:%M"),
@@ -37,7 +47,6 @@ class WebController < ApplicationController
 
 	def receive_message
 		msgs = Msg.where("((send_id = ? AND recv_id = ?) OR (send_id = ? AND recv_id = ?)) AND deleted = ?", params[:my_user_id], params[:target_user_id], params[:target_user_id], params[:my_user_id], false)
-		puts msgs.inspect
 		user_msgs = Array.new
 		msgs.each do |msg|
 			user_msgs.push({
