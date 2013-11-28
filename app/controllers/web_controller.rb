@@ -22,7 +22,7 @@ class WebController < ApplicationController
     msg.content = params[:content]
     msg.save
     #sender #receiver
-    ['1', "#{target_user_id}"].each do |x|
+    ['1', "#{params[:target_user_id]}"].each do |x|
       Pusher[x].trigger('new_msg', {
         content: params[:content],
         send_id: 1,

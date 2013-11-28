@@ -18,10 +18,13 @@
 </div>
 
 <script>
+	var my_user_id = '2' //TODO change this.
+	var target_user_id = '1'
 	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'mobile'}%>
 </script>
 <script>
 	$(function(){
+
 		screen_height = document.body.clientHeight
 		post_message_height = $("#post_message").height()
 		chat_heading_height = $("#chat_heading").height()
