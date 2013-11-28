@@ -28,12 +28,28 @@ class WebController < ApplicationController
         content: params[:content],
         send_id: params[:send_user_id],
         recv_id: params[:target_user_id],
-				time: msg.created_at
+				time: msg.created_at.strftime("%p %l:%M")
       })
     end
 
     render :json => {"result" => true}
   end
+
+	def receive_message
+		msgs = Msg.where("send_id = ? OR recv_id = ?", params[:user_id], params[:user_id])
+		puts msgs
+		send_msg = Array.new
+		msgs.each do |msg|
+			send_msg.push({
+				content: msg.content,
+				send_id: msg.send_id,
+				recv_id: msg.recv_id,
+				time: msg.created_at.strftime("%p %l:%M")
+			});
+		end
+
+    render :json => send_msg
+	end
 
   def login
   end

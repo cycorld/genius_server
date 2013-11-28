@@ -2,6 +2,27 @@
 //my_user_id is in web/mobile index.html.erb
 //target_user_id is in web/mobile index.html.erb
 	$(function(){
+		$.ajax({
+			url: "/receive_message",
+			type: "POST",
+			data: {
+				user_id: my_user_id
+			},
+			success: function(data) {
+				console.log(data)
+				for(i=0;i<data.length;i++){
+					console.log(data[i].send_id +" " + parseInt(my_user_id))
+					if(data[i].send_id == parseInt(my_user_id)){
+						make_message_form("ldh.png", data[i].send_id, data[i].content, data[i].time ,"current-user");
+					}else if(data[i].send_id == parseInt(target_user_id)){
+						make_message_form("ldh.png", data[i].send_id, data[i].content, data[i].time ,"");
+					}
+				}
+
+				sh = $("#message_area").height()
+				$("#message_div").scrollTop(sh)
+			}
+		})
 
     var pusher = new Pusher('ff5d6babad3bf1eb28c6');
     var channel = pusher.subscribe(my_user_id); 
@@ -9,18 +30,18 @@
       console.log(my_user_id);
       console.log(data);
 			if(data.send_id != my_user_id){
-				message_form = make_message_form("ldh.png", data.send_id, data.content, data.time ,"");
-				$("#message_area").append(message_form);
+				make_message_form("ldh.png", data.send_id, data.content, data.time ,"");
 			}
+			sh=$("#message_area").height()
+			$("#message_div").scrollTop(sh)
     });
 
 		$("#message_send").bind("click",function(){
 			time = "12:30"
 			message_text = $("#message_text").val();
-			message_form = make_message_form("ldh.png", my_user_id, message_text, time ,"current-user");
-
-			$("#message_area").append(message_form);
+			make_message_form("ldh.png", my_user_id, message_text, time ,"current-user");
 			$("#message_text").val("");
+
 			sh=$("#message_area").height()
 			$("#message_div").scrollTop(sh)
 			$("#message_text").focus();
@@ -59,5 +80,6 @@
 			+'		</p>'
 			+'	</div>'
 			+'</li>';
-		return message_form;
+
+			$("#message_area").append(message_form);
 	}
