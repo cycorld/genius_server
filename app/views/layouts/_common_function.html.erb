@@ -1,0 +1,37 @@
+//<script>
+	$(function(){
+		$("#message_send").bind("click",function(){
+
+			time = "12:30"
+
+			message_text = $("#message_text").val();
+			message_form = make_message_form("ldh.png", "이두희", message_text, time ,"current-user");
+			$("#message_area").append(message_form);
+			$("#message_text").val("");
+			sh=$("#message_area").height()
+			$("#message_div").scrollTop(sh)
+			$("#message_text").focus();
+		})
+
+		$('#message_text').bind('keypress', function(e) {
+			if (e.which == 13) { /* 13 == enter key@ascii */
+					$('#message_send').click();
+			}
+		});
+	});
+	function make_message_form(photo_filename, name, message, time, class_name){
+		message_form =
+			'<li class="' + class_name + ' <%=mode%>">'
+			+'	<img class="<%= mode%>" src="player/' + photo_filename + '">'
+			+'	<div class="bubble">'
+			+		 '<p>' + name + '</p>'
+			+'		<p class="message">'
+			+ 			message
+			+'		</p>'
+			+'		<p class="time">'
+			+'			<strong>' + time
+			+'		</p>'
+			+'	</div>'
+			+'</li>';
+		return message_form;
+	}

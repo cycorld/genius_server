@@ -14,74 +14,23 @@
 							Contacts (15)<i class="icon-plus pull-right"></i>
 						</div>
 						<ul>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="/player/dh.png">이두희<i class="icon-circle text-danger"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female2.png">Jessie Pinkman<i class="icon-circle text-success"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-male.jpg">Skyler White<i class="icon-circle text-warning"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female.png">Flynn White<i class="icon-circle text-danger"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female2.png">Hank Schrader<i class="icon-circle text-muted"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-male.jpg">Marie Schrader<i class="icon-circle text-success"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female.png">Steve Gomez<i class="icon-circle text-warning"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-female2.png">Saul Goodman<i class="icon-circle text-success"></i></a>
-							</li>
-							<li>
-								<a href="/chat.html#"><img width="30" height="30" src="./se7en - Dashboard17_files/avatar-male.jpg">Mike Ehrmantraut<i class="icon-circle text-success"></i></a>
-							</li>
-
+							<%@users.each do |user|%>
+								<li>
+								<a href="/chat.html#"><img width="30" height="30" src="/player/<%=user.filename%>.png"><%=user.name%><i class="icon-circle text-danger"></i></a>
+								</li>
+							<%end%>
 						</ul>
 					</div>
 					<div class="heading">
 						<i class="icon-comments"></i>Chat with <a href="/chat.html#">John Smith</a><i class="icon-cog pull-right"></i><i class="icon-smile pull-right"></i>
 					</div>
-					<div class="widget-content padded">
-						<ul>
-							<li class="web">
-								<img class="web" src="player/ldh.png">
-								<div class="bubble">
-									<a class="user-name" href="">John Smith</a>
-									<p class="message">
-										Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.
-									</p>
-									<p class="time">
-										<strong>Today </strong>3:53 pm
-									</p>
-								</div>
-							</li>
-
-							<li class="current-user web">
-								<img class="web"src="player/ldh.png">
-								<div class="bubble">
-									<a class="user-name" href="">Jane Smith</a>
-									<p class="message">
-										Sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed augue. Integer eu magna sit amet metus fermentum posuere. Morbi sit amet nulla sed dolor elementum imperdiet. Quisque fermentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-									</p>
-									<p class="time">
-										<strong>Today </strong>3:53 pm
-									</p>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div class="post-message">
-						<input class="form-control" placeholder="Write your message here" type="text"><input type="submit" value="Send">
-					</div>
+					<%=render :partial => 'layouts/common_view', :locals => {:mode => 'web'}%>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<script>
+	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'web'}%>
+</script>

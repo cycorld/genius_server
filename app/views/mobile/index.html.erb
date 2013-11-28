@@ -1,44 +1,32 @@
 <div class="modal-shiftfix">
 	<div class="container-fluid main-content">
-		<div class="row">
+		<div class="row mobile">
 			<!-- Conversation -->
-			<div class="col-lg-12">
+			<div id="chat_container" class="col-lg-12">
+				<div class="heading" id="chat_heading">
+						<img style="width:24%" src="images/s_agree.png">
+						<img style="width:24%" src="images/agree.png">
+						<img style="width:24%" src="images/disagree.png">
+						<img style="width:24%" src="images/s_disagree.png">
+				</div>
 				<div class="widget-container scrollable chat">
-					<div class="widget-content">
-						<ul>
-							<li class="mobile">
-								<img class="mobile" src="/player/ldh.png">
-								<div class="bubble">
-									<a class="user-name" href="">John Smith</a>
-									<p class="message">
-										Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-									</p>
-									<p class="time">
-										<strong>Today </strong>3:53 pm
-									</p>
-								</div>
-							</li>
-							<li class="current-user mobile">
-								<img class="mobile" src="/player/ldh.png">
-								<div class="bubble">
-									<a class="user-name" href="">Jane Smith</a>
-									<p class="message">
-										Donec odio. Quisque volutpat mattis eros.
-									</p>
-									<p class="time">
-										<strong>Today </strong>3:53 pm
-									</p>
-								</div>
-							</li>
-													</ul>
-					</div>
-					<div class="post-message">
-						<input class="form-control" placeholder="Write your message here&#65533;&#65533;" type="text"><input type="submit" value="Send">
-					</div>
+						<%=render :partial => 'layouts/common_view', :locals => {:mode => 'mobile'}%>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-
+<script>
+	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'mobile'}%>
+</script>
+<script>
+	$(function(){
+		screen_height = document.body.clientHeight
+		post_message_height = $("#post_message").height()
+		chat_heading_height = $("#chat_heading").height()
+		height = screen_height - post_message_height - 10 - chat_heading_height
+		$("#message_div").css("height", height)
+		$("#post_message").css("top", height)
+	})
+</script>

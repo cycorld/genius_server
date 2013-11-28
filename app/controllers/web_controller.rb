@@ -2,6 +2,7 @@ class WebController < ApplicationController
   before_filter :is_admin, :except => [:login, :login_process]
   def index
     @msgs = Msg.where('send_id = ? OR recv_id = ?', params[:target_user_id], params[:target_user_id]).where(:deleted => false).order("created_at DESC")
+		@users = User.all
   end
 
   def flush #Ajax call

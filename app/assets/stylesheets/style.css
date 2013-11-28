@@ -627,7 +627,7 @@ dl {
       .chat .widget-content ul li.mobile {
         margin-bottom: 14px;
         padding-left: 40px;
-        padding-right: 80px;
+        padding-right: 40px;
         position: relative; }
         .chat .widget-content ul li:last-child {
           margin-bottom: 0; }
@@ -643,8 +643,8 @@ dl {
           bottom: -2px;
           left: 0;
           border-radius: 20%;
-					width: 30px;
-					height: 30px; }
+					width: 50px;
+					height: 50px; }
 
         .chat .widget-content ul li .bubble {
           padding: 12px 15px;
@@ -681,7 +681,7 @@ dl {
           padding-left: 80px; }
         .chat .widget-content ul li.current-user.mobile {
           padding-right: 40px;
-          padding-left: 80px; }
+          padding-left: 40px; }
           .chat .widget-content ul li.current-user img {
             right: 0;
             left: auto; }
@@ -712,6 +712,16 @@ dl {
       width: 100%;
       height: 100%; }
     .chat .post-message input[type="submit"] {
+      position: absolute;
+      top: 12px;
+      right: 10px;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      color: #007aff;
+      font-weight: 600;
+      font-size: 14px; }
+    .chat .post-message .send-div {
       position: absolute;
       top: 12px;
       right: 10px;
@@ -847,6 +857,8 @@ dl {
 /*----------------------------------------------------------------------------------- */
 .row {
   margin: 0 10px 0; }
+	.row.mobile{
+		margin: 0; }
   .row .row {
     margin: 0 -10px 0; }
   .row + .row {
@@ -912,7 +924,7 @@ body.fourofour {
     overflow: hidden; }
 
   body {
-    padding-top: 60px; }
+    padding-top: 0px; }
     body.nav-open {
       overflow: hidden; }
       body.nav-open .navbar, body.nav-open .container-fluid.main-content {
