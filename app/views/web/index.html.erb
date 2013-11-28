@@ -32,8 +32,7 @@
 </div>
 
 <script>
-	var my_user_id = 1 
-	var target_user_id = 2 //TODO change this.
-	var users=<%=@users%>
-	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'web', :users=>@users}%>
+	var my_user_id = '1' 
+	var target_user_id = '2' //TODO change this.
+	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'web'}%>
 </script>

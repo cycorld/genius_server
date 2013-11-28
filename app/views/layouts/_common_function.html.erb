@@ -5,14 +5,20 @@
     var pusher = new Pusher('ff5d6babad3bf1eb28c6');
     var channel = pusher.subscribe(my_user_id); 
     channel.bind('new_msg', function(data) {
+      console.log(my_user_id);
       console.log(data);
-			message_form = make_message_form("ldh.png", "이두희", message_text, time ,"current-user");
+			if(data.send_id != my_user_id){
+				message_form = make_message_form("ldh.png", data.send_id, data.content, data.time ,"");
+				$("#message_area").append(message_form);
+			}
     });
 
 		$("#message_send").bind("click",function(){
+
 			time = "12:30"
 			message_text = $("#message_text").val();
 			message_form = make_message_form("ldh.png", "이두희", message_text, time ,"current-user");
+
 			$("#message_area").append(message_form);
 			$("#message_text").val("");
 			sh=$("#message_area").height()

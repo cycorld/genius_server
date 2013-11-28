@@ -26,7 +26,8 @@ class WebController < ApplicationController
       Pusher[x].trigger('new_msg', {
         content: params[:content],
         send_id: 1,
-        recv_id: params[:target_user_id]
+        recv_id: params[:target_user_id],
+				time: msg.created_at
       })
     end
 
