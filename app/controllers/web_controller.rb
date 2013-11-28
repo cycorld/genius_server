@@ -25,7 +25,7 @@ class WebController < ApplicationController
     ['1', "#{target_user_id}"].each do |x|
       Pusher[x].trigger('new_msg', {
         content: params[:content],
-        send_id: 1
+        send_id: 1,
         recv_id: params[:target_user_id]
       })
     end
