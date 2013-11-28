@@ -1,6 +1,6 @@
 class MobileController < ApplicationController
   def index
-
+		@my_user_id = params[:id] || '0' 
   end
 
   def push

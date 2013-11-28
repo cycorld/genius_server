@@ -30,15 +30,6 @@
 	var my_user_id = '1' 
 	var target_user_id = '2' //TODO change this.
 	var user
-	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'web'}%>
-	function load_user_chat(user_id){
-		//TODO change btn-primary class
-		for(i=1;i<user.length;i++)
-			$("#user_list_" + i).removeClass("btn-primary")
-		$("#user_list_" + user_id).addClass("btn-primary")
 
-		$("#message_area").html("");
-		target_user_id = user_id
-		receive_previous_msg(my_user_id, user)
-	}
+	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'web'}%>
 </script>

@@ -9,10 +9,9 @@
 			success: function(data) {
 				user = new Array(data.length+1)
 				for(i=0;i<data.length;i++){
-					console.log(data[i])
 					user[i+1]=data[i]
 				}
-				load_user_chat('2')
+				load_user_chat(my_user_id)
 			}
 		})
 
@@ -65,7 +64,7 @@
 	function make_message_form(photo_filename, name, message, time, class_name){
 		message_form =
 			'<li class="' + class_name + ' <%=mode%>">'
-			+'	<img class="<%= mode%>" src="player/' + photo_filename + '.png">'
+			+'	<img class="<%= mode%>" src="/player/' + photo_filename + '.png">'
 			+'	<div class="bubble">'
 			+		 '<p>' + name + '</p>'
 			+'		<p class="message">'
@@ -80,7 +79,7 @@
 		$("#message_area").append(message_form);
 	}
 
-	function receive_previous_msg(my_user_id, user){
+	function receive_previous_msg(){
 	//receive previous message
 		$.ajax({
 			url: "/receive_message",
@@ -102,4 +101,21 @@
 			}
 		})
 	}
+	function load_user_chat(user_id){
+		//TODO change btn-primary class
+		$("#message_area").html("");
+		<%if mode == 'web'%>
+			for(i=1;i<user.length;i++)
+				$("#user_list_" + i).removeClass("btn-primary")
+			$("#user_list_" + user_id).addClass("btn-primary")
+
+			target_user_id = user_id
+			receive_previous_msg()
+		<%elsif mode == 'mobile'%>
+			receive_previous_msg()
+		<%end%>
+
+	}
+
+
 
