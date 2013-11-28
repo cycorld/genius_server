@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
 
-  def is_admin?
+  def is_admin
     if !session[:admin].nil?
       redirect_to :action => "login", :controller => 'web'
     end
