@@ -4,7 +4,9 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.1'
 gem 'sidekiq'
 gem 'pusher'
-#gem 'mysql2'
+group :production do
+  gem 'mysql2'
+end
 gem 'therubyracer'
 
 # Use sqlite3 as the database for Active Record
