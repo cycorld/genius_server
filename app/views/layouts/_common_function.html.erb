@@ -1,6 +1,9 @@
 //<script>
 //my_user_id is in web/mobile index.html.erb
 //target_user_id is in web/mobile index.html.erb
+
+	var time_id = 0
+	var user
 	$(function(){
 //receive all people
 		$.ajax({
@@ -14,7 +17,6 @@
 				load_user_chat(my_user_id)
 			}
 		})
-
 //push event
     var pusher = new Pusher('ff5d6babad3bf1eb28c6');
     var channel = pusher.subscribe(my_user_id); 
@@ -22,18 +24,19 @@
       console.log(my_user_id);
       console.log(data);
 			if(data.send_id == target_user_id){
-				make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time ,"");
+				make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
 				sh=$("#message_area").height()
 				$("#message_div").scrollTop(sh)
+			} else if(data.send_id == my_user_id){
+				$("#time_" + data.time_id).html(data.time)
 			}
-
     });
 
 //send button click
 		$("#message_send").bind("click",function(){
-			time = "12:30" //TODO change Time
+			time_id= time_id +1
 			message_text = $("#message_text").val();
-			make_message_form(user[my_user_id].filename, user[my_user_id].name, message_text, time ,"current-user");
+			make_message_form(user[my_user_id].filename, user[my_user_id].name, message_text, "", time_id ,"current-user");
 			$("#message_text").val("");
 
 			sh=$("#message_area").height()
@@ -46,7 +49,8 @@
 				data: {
 					target_user_id: target_user_id,
 					send_user_id: my_user_id,
-					content: message_text
+					content: message_text, 
+					time_id: time_id
 				},
 				success: function(data) {
 					//alert(data)
@@ -61,7 +65,7 @@
 		});
 	});
 
-	function make_message_form(photo_filename, name, message, time, class_name){
+	function make_message_form(photo_filename, name, message, time, time_id, class_name){
 		message_form =
 			'<li class="' + class_name + ' <%=mode%>">'
 			+'	<img class="<%= mode%>" src="/player/' + photo_filename + '.png">'
@@ -70,7 +74,7 @@
 			+'		<p class="message">'
 			+ 			message
 			+'		</p>'
-			+'		<p class="time">'
+			+'		<p id="time_' + time_id + '" class="time">'
 			+'			<strong>' + time
 			+'		</p>'
 			+'	</div>'
@@ -91,9 +95,9 @@
 			success: function(data) {
 				for(i=0;i<data.length;i++){
 					if(data[i].send_id == parseInt(my_user_id)){
-						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,"current-user");
+						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time, 0 ,"current-user");
 					}else if(data[i].send_id == parseInt(target_user_id)){
-						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,"");
+						make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,0 ,"");
 					}
 				}
 				sh = $("#message_area").height()
@@ -104,12 +108,18 @@
 	function load_user_chat(user_id){
 		//TODO change btn-primary class
 		$("#message_area").html("");
+	
 		<%if mode == 'web'%>
 			for(i=1;i<user.length;i++)
 				$("#user_list_" + i).removeClass("btn-primary")
 			$("#user_list_" + user_id).addClass("btn-primary")
 
 			target_user_id = user_id
+
+			if(target_user_id != '1'){
+				$("#post_message").show();
+			}
+
 			receive_previous_msg()
 		<%elsif mode == 'mobile'%>
 			receive_previous_msg()

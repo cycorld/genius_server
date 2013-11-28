@@ -6,12 +6,15 @@
 				<div class="widget-container scrollable chat chat-page">
 					<div class="contact-list">
 						<div class="heading">
-							Contacts (15)<i class="icon-plus pull-right"></i>
+							Contacts (<%=@users.size-1%>)<i class="icon-plus pull-right"></i>
 						</div>
 						<ul>
 							<%@users.each do |user|%>
+								<%if user.id == 1%>
+									<%next%>
+								<%end%>
 								<li>
-								<a id="user_list_<%=user.id%>"onclick="load_user_chat('<%=user.id%>')"><img width="30" height="30" src="/player/<%=user.filename%>.png"><%=user.name%><i class="icon-circle text-danger"></i></a>
+								<a id="user_list_<%=user.id%>" onclick="load_user_chat('<%=user.id%>')"><img width="30" height="30" src="/player/<%=user.filename%>.png"><%=user.name%><i class="icon-circle text-danger"></i></a>
 								</li>
 							<%end%>
 						</ul>
@@ -28,8 +31,13 @@
 
 <script>
 	var my_user_id = '1' 
-	var target_user_id = '2' //TODO change this.
-	var user
+	var target_user_id = '1'
+
 
 	<%=render :partial => 'layouts/common_function', :locals => {:mode => 'web'}%>
+	$(function(){
+		if(target_user_id == '1')
+			$("#post_message").hide();
+	})
+
 </script>

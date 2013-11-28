@@ -28,7 +28,8 @@ class WebController < ApplicationController
         content: params[:content],
         send_id: params[:send_user_id],
         recv_id: params[:target_user_id],
-				time: msg.created_at.strftime("%p %l:%M")
+				time: msg.created_at.strftime("%p %l:%M"),
+				time_id: params[:time_id]
       })
     end
 
