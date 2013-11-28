@@ -41,6 +41,9 @@ p {
   p.lead {
     font-weight: 300; }
 
+p.mobile {
+  margin: 0 0 0px; }
+
 strong {
   font-weight: 700; }
 
