@@ -74,12 +74,12 @@
 		message_form =
 			'<li class="' + class_name + ' <%=mode%>">'
 			+'	<img class="<%= mode%>" src="/player/' + photo_filename + '.png">'
-			+'	<div class="bubble <%= mode%>">'
-			+		 '<p>' + name + '</p>'
-			+'		<p class="message">'
+			+'	<div class="bubble ">'
+			+		 '<p class="<%= mode%>">' + name + '</p>'
+			+'		<p class="<%= mode%> message">'
 			+ 			message
 			+'		</p>'
-			+'		<p id="time_' + time_id + '" class="time">'
+			+'		<p id="time_' + time_id + '" class="<%= mode%> time">'
 			+'			<strong>' + time
 			+'		</p>'
 			+'	</div>'
