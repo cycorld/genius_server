@@ -1,9 +1,9 @@
-<div class="modal-shiftfix">
-	<div class="container-fluid main-content">
-		<div class="row mobile">
+<div class="modal-shiftfix" id="temp1">
+	<div class="container-fluid main-content" id="temp2">
+		<div class="row mobile"id="temp3">
 			<!-- Conversation -->
 			<div id="chat_container" class="col-lg-12">
-				<div class="widget-container scrollable chat">
+				<div class="widget-container chat" style="padding-bottom:0px">
 						<%=render :partial => 'layouts/common_view', :locals => {:mode => 'mobile'}%>
 				</div>
 			</div>
@@ -18,10 +18,9 @@
 </script>
 <script>
 	$(function(){
-		screen_height = document.body.clientHeight
-		post_message_height = $("#post_message").height()
-		height = screen_height - post_message_height - 10
-		$("#message_div").css("height", height)
-		$("#post_message").css("top", height)
+		//screen_height = document.body.clientHeight
+		//post_message_height = $("#post_message").height()
+		//height = screen_height - post_message_height - 10
+		//$("#message_div").css("height", height)
 	})
 </script>

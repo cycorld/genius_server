@@ -27,8 +27,9 @@
       }else if(data.send_id == target_user_id){
         make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
       }
-      sh=$("#message_area").height();
-      $("#message_div").scrollTop(sh);
+
+			scrollbottom();
+
 			<%if mode == 'web'%>
 				if(data.send_id != target_user_id){
 					$("#list_circle_" + data.send_id).addClass("text-danger")
@@ -108,8 +109,7 @@
             make_message_form(user[data[i].send_id].filename, user[data[i].send_id].name, data[i].content, data[i].time ,0 ,"");
           }
         }
-        sh = $("#message_area").height()
-        $("#message_div").scrollTop(sh)
+				scrollbottom();
       }
     })
 	}
@@ -139,5 +139,13 @@
 		<%elsif mode == 'mobile'%>
 			receive_previous_msg()
 		<%end%>
-
+	}
+	function scrollbottom(){
+		<%if mode == 'web'%>
+			sh = $("#message_area").height()
+			$("#message_div").scrollTop(sh)
+		<%elsif mode == 'mobile'%>
+			sh = $("#chat_container").height()
+			$("#html_body").scrollTop(sh)
+		<%end%>
 	}
