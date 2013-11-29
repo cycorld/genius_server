@@ -1,10 +1,13 @@
 				<%if mode == 'mobile'%>	
-					<div id="message_div" class="widget-content">
+					<div id="message_div" class="widget-content" style="padding-right:0px">
+						<ul id="message_area" style="margin-bottom:0px">
+						</ul>
 				<%elsif mode == 'web'%>	
 					<div id="message_div" class="widget-content padded">
-				<%end%>
 						<ul id="message_area">
 						</ul>
+				<%end%>
+
 					</div>
         <%if mode == 'web'%>
 					<div id="post_message" class="post-message">
@@ -12,3 +15,8 @@
 						<div id="message_send" class="send-div" style="cursor:pointer">send<div>
 					</div>
         <%end%>
+				<img style="display: none;" src="/images/agree.png">
+				<img style="display: none;" src="/images/s_agree.png">
+				<img style="display: none;" src="/images/disagree.png">
+				<img style="display: none;" src="/images/s_disagree.png">
+				

@@ -16,7 +16,6 @@ class WebController < ApplicationController
   end
 
   def push #Ajax call
-
     content = params[:content]
 
     msg = Msg.new

@@ -5,7 +5,7 @@ gem 'rails', '4.0.1'
 gem 'sidekiq'
 gem 'pusher'
 group :production do
-  gem 'mysql2'
+#  gem 'mysql2'
 end
 gem 'therubyracer'
 
