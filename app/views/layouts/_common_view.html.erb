@@ -1,10 +1,13 @@
 				<%if mode == 'mobile'%>	
-					<div id="message_div" class="widget-content">
+					<div id="message_div" class="widget-content" style="padding-right:0px">
+						<ul id="message_area" style="margin-bottom:0px">
+						</ul>
 				<%elsif mode == 'web'%>	
 					<div id="message_div" class="widget-content padded">
-				<%end%>
 						<ul id="message_area">
 						</ul>
+				<%end%>
+
 					</div>
         <%if mode == 'web'%>
 					<div id="post_message" class="post-message">
