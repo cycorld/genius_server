@@ -22,19 +22,22 @@
     var channel = pusher.subscribe(my_user_id); 
     channel.bind('new_msg', function(data) {
       $("#send_time_" + data.time_id).remove();
-			if(data.send_id == my_user_id){
-        make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"current-user");
-      }else if(data.send_id == target_user_id){
-        make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
-      }
-
-			scrollbottom();
-
-			<%if mode == 'web'%>
-				if(data.send_id != target_user_id){
-					$("#list_circle_" + data.send_id).addClass("text-danger")
+			if(!(data.send_id == my_user_id && data.send_id == target_user_id)){
+				if(data.send_id == my_user_id){
+					make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"current-user");
+				}else if(data.send_id == target_user_id){
+					make_message_form(user[data.send_id].filename, user[data.send_id].name, data.content, data.time, 0 ,"");
 				}
-			<%end%>
+
+				scrollbottom();
+
+				<%if mode == 'web'%>
+					if(data.send_id != target_user_id){
+						$("#list_circle_" + data.send_id).addClass("text-danger")
+					}
+				<%end%>
+			}
+
 		});
 
 //send button click
