@@ -25,7 +25,7 @@ class WebController < ApplicationController
     if params[:content][0] == '/'
       puts "hi"
       command = params[:content].split('/')[1]
-      content = %Q[<img src='/images/#{command}.png' style='width:125px;height:125px' />]
+      content = %Q[<center><img src='/images/#{command}.png' style='width:125px;height:125px' /></center>]
       msg.command = true
     end
     msg.content = content
